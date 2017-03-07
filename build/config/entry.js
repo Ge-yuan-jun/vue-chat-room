@@ -9,5 +9,6 @@ export default {
     app: [ // app
         './main.js', // 入口
         './global/utils', // 工具类
+        './main.js'
     ]
 }

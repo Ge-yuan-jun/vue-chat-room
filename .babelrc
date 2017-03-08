@@ -1,9 +1,17 @@
 {
   "presets": [
-    ["env", { "modules": false }],
+    ["env", { 
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7"]
+      },
+      "loose": true 
+    }],
     "stage-2"
   ],
-  "plugins": ["transform-runtime"],
+  "plugins": [
+    "transform-runtime",
+    "add-module-exports"
+  ],
   "comments": false,
   "env": {
     "test": {

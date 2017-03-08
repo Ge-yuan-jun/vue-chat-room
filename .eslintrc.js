@@ -4,10 +4,15 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
+    allowImportExportEverywhere: false
   },
+
   env: {
     browser: true,
+    node: true,
+    es6: true,
+    commonjs: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
@@ -23,5 +28,6 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
-  }
+  },
+  globals: Object.assign({ Vue: true }, {})
 }

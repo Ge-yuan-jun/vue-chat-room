@@ -6,17 +6,13 @@
       },
       "loose": true 
     }],
-    "stage-2"
+    "stage-0",
+    // vue-cli生成的文件必须 stage-2
+    "stage-2" 
   ],
   "plugins": [
     "transform-runtime",
     "add-module-exports"
   ],
-  "comments": false,
-  "env": {
-    "test": {
-      "presets": ["env", "stage-2"],
-      "plugins": [ "istanbul" ]
-    }
-  }
+  "comments": false
 }

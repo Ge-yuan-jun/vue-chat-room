@@ -5,7 +5,7 @@
   "author": "GeYuanjun <daydaygyj@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "babel-node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "fastclick": "^1.0.6",
     "vue": "^2.2.1",
     "vue-router": "^2.2.0",
     "vuex": "^2.2.1"

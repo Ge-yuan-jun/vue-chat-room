@@ -4,6 +4,9 @@ import EslintFriendlyFormatter from 'eslint-friendly-formatter'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import WebpackNotifierPlugin from 'webpack-build-notifier'
+
+import chalk from 'chalk'
 
 import { cssLoaders, styleLoaders } from './utils/index'
 import { entry, alias, provide } from './config'

@@ -17,6 +17,11 @@ body {
   background-size: cover;
 }
 
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

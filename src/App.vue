@@ -11,6 +11,13 @@ export default {
 </script>
 
 <style>
+body {
+  color: #4d4d4d;
+  background: #f5f5f5 url('./assets/nodejs.png');
+  background-size: cover;
+}
+
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -59,9 +59,49 @@ const state = {
     }
   ],
   // 选中的聊天窗口
-  currentSessionId: 1
+  currentSessionId: 1,
+  // 筛选
+  filterKey: ''
 }
 
+const mutations = {
+  // 初始化
+  INIT (state) {
+    let data = localStorage.getItem('vue-chat')
+    if (data) {
+      state.sessions = JSON.parse(data)
+    }
+  },
+
+  // 发送消息
+  SEND (state, content) {
+    let session = state.sessions.find(item => item.id === state.currentSessionId)
+    session.message.push({
+      content,
+      date: new Date()
+    })
+  },
+
+  // 选择会话
+  SELECT_SESSION (state, id) {
+    state.currentSessionId = id
+  },
+
+  // 搜索
+  SET_FILTER_KEY (state, value) {
+    state.filterKey = value
+  }
+}
+
+Vuex.Store.watch(
+  (state) => state.sessions,
+  (val) => {
+    console.log('change: ', val)
+    localStorage.setItem('vue-chat', JSON.parse(val))
+  }
+)
+
 export default new Vuex.Store({
-  state
+  state,
+  mutations
 })

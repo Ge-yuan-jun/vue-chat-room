@@ -93,7 +93,12 @@ const mutations = {
   }
 }
 
-Vuex.Store.watch(
+const store = new Vuex.Store({
+  state,
+  mutations
+})
+
+store.watch(
   (state) => state.sessions,
   (val) => {
     console.log('change: ', val)
@@ -101,7 +106,4 @@ Vuex.Store.watch(
   }
 )
 
-export default new Vuex.Store({
-  state,
-  mutations
-})
+export default store

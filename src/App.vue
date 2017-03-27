@@ -15,6 +15,7 @@ body {
   color: #4d4d4d;
   background: #f5f5f5 url('./assets/nodejs.png');
   background-size: cover;
+  background-color: #c3c3c3;
 }
 
 ul {

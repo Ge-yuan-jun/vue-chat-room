@@ -93,9 +93,17 @@ const mutations = {
   }
 }
 
+const actions = {
+  initData: ({ dispatch }) => dispatch('INIT'),
+  sendMessage: ({ dispatch }, content) => dispatch('SEND', content),
+  selectSession: ({ dispatch }, id) => dispatch('SELECT_SESSION', id),
+  search: ({ dispatch }, value) => dispatch('SET_FILTER_KEY', value)
+}
+
 const store = new Vuex.Store({
   state,
-  mutations
+  mutations,
+  actions
 })
 
 store.watch(

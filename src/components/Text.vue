@@ -1,13 +1,27 @@
 <template>
   <div class="text">
-    <textarea placeholder="按 Ctrl + Enter 发送"></textarea>
+    <textarea
+      placeholder="按 Ctrl + Enter 发送"
+      v-model="content"
+      @keyup="send"></textarea>
   </div>
 </template>
 <script>
+
+  import { mapActions } from 'vuex'
   export default {
     data () {
       return {
-        msg: ''
+        content: ''
+      }
+    },
+    methods: {
+      ...mapActions(['sendMessage']),
+      send (e) {
+        if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
+          this.sendMessage(this.content)
+          this.content = ''
+        }
       }
     }
   }

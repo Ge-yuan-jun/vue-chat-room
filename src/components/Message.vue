@@ -35,10 +35,8 @@
     },
     directives: {
       // 发送一条消息之后，自动上移
-      'scroll-bottom' () {
-        this.vm.$nextTick(() => {
-          this.el.scrollTop = this.el.scrollHeight + this.el.clientHeight
-        })
+      'scroll-bottom' (el) {
+        el.scrollTop = el.scrollHeight + el.clientHeight
       }
     }
   }

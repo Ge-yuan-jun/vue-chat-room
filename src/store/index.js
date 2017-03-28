@@ -6,19 +6,24 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const userHeader = require('../assets/header.jpeg')
+const header1 = require('../assets/1.jpg')
+const header2 = require('../assets/2.png')
+const header3 = require('../assets/3.jpg')
+
 const state = {
   // 当前用户
   user: {
     userId: 1, // 用户id，唯一标识
     name: '墨白', // 用户昵称
-    img: 'src/assets/header.jpeg' // 用户头像地址
+    img: userHeader // 用户头像地址
   },
   sessions: [
     {
       id: 2,
       user: {
         name: '一只喵',
-        img: 'src/assets/1.jpg'
+        img: header1
       },
       message: [
         {
@@ -35,7 +40,7 @@ const state = {
       id: 3,
       user: {
         name: 'vue',
-        img: 'src/assets/2.png'
+        img: header2
       },
       message: [
         {
@@ -48,7 +53,7 @@ const state = {
       id: 4,
       user: {
         name: 'webpack',
-        img: 'src/assets/3.jpg'
+        img: header3
       },
       message: [
         {
@@ -59,14 +64,14 @@ const state = {
     }
   ],
   // 选中的聊天窗口
-  currentSessionId: 1,
+  currentSessionId: 2,
   // 筛选
   filterKey: ''
 }
 
 const mutations = {
   // 初始化
-  INIT (state) {
+  init (state) {
     let data = localStorage.getItem('vue-chat')
     if (data) {
       state.sessions = JSON.parse(data)
@@ -74,7 +79,7 @@ const mutations = {
   },
 
   // 发送消息
-  SEND (state, content) {
+  send (state, content) {
     let session = state.sessions.find(item => item.id === state.currentSessionId)
     session.message.push({
       content,
@@ -83,27 +88,36 @@ const mutations = {
   },
 
   // 选择会话
-  SELECT_SESSION (state, id) {
+  select_session (state, id) {
     state.currentSessionId = id
   },
 
   // 搜索
-  SET_FILTER_KEY (state, value) {
+  setFilterKey (state, value) {
     state.filterKey = value
   }
 }
 
 const actions = {
-  initData: ({ dispatch }) => dispatch('INIT'),
-  sendMessage: ({ dispatch }, content) => dispatch('SEND', content),
-  selectSession: ({ dispatch }, id) => dispatch('SELECT_SESSION', id),
-  search: ({ dispatch }, value) => dispatch('SET_FILTER_KEY', value)
+  initData: ({ commit }) => commit('init'),
+  sendMessage: ({ commit }, content) => commit('send', content),
+  selectSession: ({ commit }, id) => commit('select_session', id),
+  search: ({ commit }, value) => commit('setFilterKey', value)
+}
+
+const getters = {
+  sessions: (state) => {
+    let result = state.sessions.filter(session => session.user.name.includes(state.filterKey))
+    return result
+  },
+  currentId: (state) => state.currentSessionId
 }
 
 const store = new Vuex.Store({
   state,
-  mutations,
-  actions
+  getters,
+  actions,
+  mutations
 })
 
 store.watch(

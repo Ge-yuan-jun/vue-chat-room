@@ -1,23 +1,35 @@
 <template>
   <div class="list">
     <ul>
-      <li class="active">
-        <img class="avatar" width="30" height="30" src="../assets/header.jpeg">
-        <p class="name">小墨白</p>
-      </li>
-      <li>
-        <img class="avatar" width="30" height="30" src="../assets/header.jpeg">
-        <p class="name">大墨白</p>
+      <li v-for="item in sessions"
+        :class="{active: item.id === currentId}"
+        @click="selectSession(item.id)">
+        <img class="avatar" width="30" height="30" :src="item.user.img">
+        <p class="name">{{item.user.name}}</p>
       </li>
     </ul>
   </div>
 </template>
 <script>
+
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
     data () {
       return {
         msg: ''
       }
+    },
+    computed: {
+      ...mapGetters([
+        'sessions',
+        'currentId'
+      ])
+    },
+    methods: {
+      ...mapActions([
+        'selectSession'
+      ])
     }
   }
 </script>

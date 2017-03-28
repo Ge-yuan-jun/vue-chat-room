@@ -1,21 +1,37 @@
 <template>
   <div class="card">
     <header>
-      <img class="avatar" alt="墨白" src="../assets/header.jpeg">
-      <p class="name">墨白</p>
+      <img class="avatar" :src="user.img">
+      <p class="name">{{user.name}}</p>
     </header>
     <footer>
-      <input class="search" type="text" placeholder="搜索好友">
+      <input
+        class="search"
+        type="text"
+        placeholder="搜索好友"
+        ref="search"
+        @keyup="search">
     </footer>
   </div>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
-    data () {
-      return {
-        msg: ''
-      }
+    mounted () {
+      console.log('1:', this.$refs.search.value)
+    },
+    computed: {
+      ...mapGetters([
+        'user',
+        'filterKey'
+      ])
+    },
+    methods: {
+      ...mapActions([
+        'search'
+      ])
     }
   }
 </script>

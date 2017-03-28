@@ -15,7 +15,7 @@ const state = {
   // 当前用户
   user: {
     userId: 1, // 用户id，唯一标识
-    name: '墨白', // 用户昵称
+    name: '白白', // 用户昵称
     img: userHeader // 用户头像地址
   },
   sessions: [
@@ -110,7 +110,9 @@ const getters = {
     let result = state.sessions.filter(session => session.user.name.includes(state.filterKey))
     return result
   },
-  currentId: (state) => state.currentSessionId
+  currentId: (state) => state.currentSessionId,
+  user: (state) => state.user,
+  filterKey: (state) => state.filterKey
 }
 
 const store = new Vuex.Store({

@@ -5,12 +5,13 @@
       <p class="name">{{user.name}}</p>
     </header>
     <footer>
+      <!-- 如果需要调后端接口，需要做debounce处理 -->
       <input
         class="search"
         type="text"
         placeholder="搜索好友"
         ref="search"
-        @keyup="search">
+        @keyup="search($refs.search.value)">
     </footer>
   </div>
 </template>
@@ -19,9 +20,6 @@
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
-    mounted () {
-      console.log('1:', this.$refs.search.value)
-    },
     computed: {
       ...mapGetters([
         'user',

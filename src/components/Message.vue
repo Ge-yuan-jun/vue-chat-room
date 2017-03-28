@@ -1,32 +1,44 @@
 <template>
-<div class="message">
-  <ul>
-    <li>
+<div class="message" v-scroll-bottom="message.message">
+  <ul v-if="message">
+    <li v-for="item in message.message">
       <p class="time">
-        <span>15:49</span>
+        <span>{{ item.date | time }}</span>
       </p>
-      <div class="main self">
-        <img class="avatar" src="../assets/header.jpeg">
-        <div class="text">说些什么好呢？</div>
-      </div>
-    </li>
-    <li>
-      <p class="time">
-        <span>14:21</span>
-      </p>
-      <div class="main">
-        <img class="avatar" src="../assets/header.jpeg">
-        <div class="text">说些什么好呢？</div>
+      <div class="main" :class="{ self: item.self }">
+        <img class="avatar" :src="item.self ? user.img : message.user.img">
+        <div class="text">{{ item.content }}</div>
       </div>
     </li>
   </ul>
 </div>
 </template>
 <script>
+
+  import { mapGetters } from 'vuex'
+
   export default {
-    data () {
-      return {
-        msg: ''
+    computed: {
+      ...mapGetters([
+        'message',
+        'user'
+      ])
+    },
+    filters: {
+      time (date) {
+        if (typeof date === 'string') {
+          date = new Date(date)
+        }
+
+        return `${date.getHours()}:${date.getMinutes()}`
+      }
+    },
+    directives: {
+      // 发送一条消息之后，自动上移
+      'scroll-bottom' () {
+        this.vm.$nextTick(() => {
+          this.el.scrollTop = this.el.scrollHeight + this.el.clientHeight
+        })
       }
     }
   }

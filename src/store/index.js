@@ -83,7 +83,8 @@ const mutations = {
     let session = state.sessions.find(item => item.id === state.currentSessionId)
     session.message.push({
       content,
-      date: new Date()
+      date: new Date(),
+      self: true
     })
   },
 
@@ -112,7 +113,8 @@ const getters = {
   },
   currentId: (state) => state.currentSessionId,
   user: (state) => state.user,
-  filterKey: (state) => state.filterKey
+  filterKey: (state) => state.filterKey,
+  message: (state) => state.sessions.find(session => session.id === state.currentSessionId)
 }
 
 const store = new Vuex.Store({
